@@ -29,8 +29,5 @@ version = "0.1.2"
 features = ["extra-traits", "full", "fold", "parsing"]
 version = "0.15.18"
 
-[dev-dependencies]
-compiletest_rs = "0.3.11"
-
 [lib]
 proc_macro = true
