@@ -6,6 +6,11 @@ use std::{borrow::Cow, collections::HashMap, fs::{create_dir_all, File, OpenOpti
     hash::Hash, io::{BufWriter, Write}, mem, sync::atomic::{AtomicUsize, Ordering::SeqCst}};
 use proc_macro2::{Span, TokenStream};
 use quote::quote;
+// i needed to add these two to get it to compile from within a nucleus crate, dunno why --bblum
+#[allow(unused_imports)]
+use quote::quote_spanned;
+#[allow(unused_imports)]
+use quote::quote_each_token;
 use syn::{fold::Fold, spanned::Spanned, *};
 
 mod mutation;
