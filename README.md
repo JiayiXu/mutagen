@@ -13,6 +13,8 @@ mutagen = { path = "/path/to/this-repository/mutagen" }
 mutagen-plugin = { path = "/path/to/this-repository/mutagen/plugin" }
 ```
 
+The rest of this README is untouched from the forked repository.
+
 ### Mutation Testing
 
 The idea behind mutation testing is to insert changes into your code to see if they make your tests fail. If not, your tests obviously fail to test the changed code.
