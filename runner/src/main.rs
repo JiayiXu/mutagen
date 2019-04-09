@@ -95,7 +95,7 @@ fn get_mutations_filename() -> Result<PathBuf> {
     );
     let mutagen_dir = root_dir.join(TARGET_MUTAGEN);
     if !mutagen_dir.exists() {
-        bail!("mutations are missing")
+        bail!(format!("mutations are missing (i looked in {:?})", mutagen_dir))
     }
     Ok(mutagen_dir.join(MUTATIONS_LIST))
 }
@@ -166,9 +166,11 @@ fn run() -> Result<()> {
             &mut full_runner
         };
 
-        if let Err(_) = runner.run(0) {
+        if let Err(e) = runner.run(0) {
             bail!(
-                "You need to make sure you don't have failing tests before running 'cargo mutagen'"
+                format!("Something horrible went wrong and I don't even know what: {:?}", e)
+                // XXX: this doesn't even trigger if you *DO* have failing tests
+                //"You need to make sure you don't have failing tests before running 'cargo mutagen'"
             );
         }
 

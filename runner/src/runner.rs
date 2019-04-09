@@ -24,6 +24,7 @@ pub trait Runner {
     fn run(&mut self, mutation_count: usize) -> Result<Status, Error>;
 }
 
+#[derive(Debug)]
 pub struct RuntimeModifier {
     multiplier: u32,
     divisor: u32,
@@ -45,6 +46,7 @@ impl RuntimeModifier {
 }
 
 /// Full suite runner executes all the test at once, given the path of the executable
+#[derive(Debug)]
 pub struct FullSuiteRunner {
     test_executable: PathBuf,
     runtime_mod: RuntimeModifier,
