@@ -63,16 +63,18 @@ fn run_mutations(runner: &mut Runner, list: &[String]) -> Result<()> {
             // At least on test should have failed
             failures += 1;
 
-            "FAILED"
+            // change the output message to avoid the success<->failure inversion confusion. --bblum
+            "SURVIVED :("
         } else {
-            "ok"
+            // "killed" in the google paper but let's avoid violent language
+            "caught"
         };
 
         println!(" ... {}", status);
     }
 
     println!(
-        "\nMutation results: {}. {} passed; {} failed\n",
+        "\nMutation results: {}. {} caught by existing tests; {} were undetected\n",
         if failures == 0 { "ok" } else { "FAILED" },
         list.len() - failures,
         failures
