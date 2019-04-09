@@ -84,7 +84,7 @@ pub fn destructure_fn_arg<'a>(
 {
     match *arg {
         FnArg::SelfRef(ArgSelfRef {
-            ref lifetime,
+            lifetime: ref _lifetime,
             ref mutability,
             ..
         }) => {
@@ -126,7 +126,7 @@ fn destructure_pat<'a>(
                 destructure_pat(&p, ty, occs, pos, argdefs);
             }
         }
-        Pat::Struct(PatStruct { ref path, ref fields, .. }) => {
+        Pat::Struct(PatStruct { path: ref _path, ref fields, .. }) => {
             for field in fields {
                 if let Member::Named(ref ident) = field.member {
                     occs.push(TyOcc::Field(ident));
@@ -135,7 +135,7 @@ fn destructure_pat<'a>(
                 }
             }
         }
-        Pat::TupleStruct(PatTupleStruct { ref path, pat: PatTuple { ref front, ref back, .. } }) => {
+        Pat::TupleStruct(PatTupleStruct { path: ref _path, pat: PatTuple { ref front, ref back, .. } }) => {
             for (i, p) in front.iter().enumerate() {
                 occs.push(TyOcc::Index(i));
                 destructure_pat(p, ty.clone(), occs, pos, argdefs);

@@ -176,7 +176,7 @@ pub fn ty_hash<H: Hasher>(ty: &Type, pos: usize, h: &mut H) {
                 ty_hash(elem, pos, h);
             }
         }
-        Type::Path(TypePath { ref qself, ref path }) => {
+        Type::Path(TypePath { qself: ref _qself, ref path }) => {
             h.write_u8(8);
             //TODO: hash qself
             path_hash(path, pos, h);
@@ -335,7 +335,7 @@ fn generic_arg_hash<H: Hasher>(g: &GenericArgument, pos: usize, h: &mut H) {
             h.write_u8(4);
             c.hash(h)
         }
-        _ => h.write_u8(5)
+        // _ => h.write_u8(5)
     }
 }
 
@@ -372,7 +372,7 @@ fn ty_param_bound_hash<H: Hasher>(bound: &TypeParamBound, pos: usize, h: &mut H)
             h.write_u8(1);
             l.hash(h)
         }
-        _ => h.write_u8(2)
+        // _ => h.write_u8(2)
     }
 }
 
@@ -409,7 +409,7 @@ fn lifetime_equal(a: &Lifetime, b: &Lifetime) -> bool {
     a == b
 }
 
-fn expr_equal(a: &Expr, b: &Expr, inout: bool) -> bool {
+fn expr_equal(a: &Expr, b: &Expr, _inout: bool) -> bool {
     a == b // TODO test this
 }
 
