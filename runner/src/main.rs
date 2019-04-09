@@ -120,7 +120,7 @@ fn compile_tests() -> Result<Vec<PathBuf>> {
         {
             for filename in msg_json["filenames"].members() {
                 let f = filename.as_str().unwrap();
-                if !f.ends_with(".rlib") {
+                if !f.ends_with(".rlib") && !f.ends_with(".dSYM") {
                     tests.push(f.to_string().into());
                 }
             }
