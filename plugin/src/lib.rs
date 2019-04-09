@@ -336,20 +336,23 @@ impl Mutagen {
         if let Lit::Int(ref literal) = lit {
             let span = lit.span();
             let val = literal.value() as u128; //TODO this may remove higher bits
+            // TODO(bblum): well, this is how to disable the busted SUB_ONE_TO_LITERAL
+            // println!("folding lit int value is {},", val);
             if int_boundaries(literal.suffix(), negative).iter().any(|x| *x == val) {
                 if negative || val == 0 { // lower bound
                     let (n, flag, mask) = self.mutations(span,
                         &[(MutationType::ADD_ONE_TO_LITERAL, "increment literal by one".into())]);
                     return parse_quote!(mutagen::inc(#lit, #n, & #cov[#flag], #mask));
-                } else { // upper bound
-                    let (n, flag, mask) = self.mutations(span,
-                        &[(MutationType::SUB_ONE_TO_LITERAL, "decrement literal by one".into())]);
-                    return parse_quote!(mutagen::dec(#lit, #n, & #cov[#flag], #mask));
+                // } else { // upper bound
+                //     let (n, flag, mask) = self.mutations(span,
+                //         &[(MutationType::SUB_ONE_TO_LITERAL, "decrement literal by one".into())]);
+                //     return parse_quote!(mutagen::dec(#lit, #n, & #cov[#flag], #mask));
                 }
             } else {
                 let (n, flag, mask) = self.mutations(span,
                     &[(MutationType::ADD_ONE_TO_LITERAL, "increment literal by one".into()),
-                      (MutationType::SUB_ONE_TO_LITERAL, "decrement literal by one".into())]);
+                      // (MutationType::SUB_ONE_TO_LITERAL, "decrement literal by one".into())
+                    ]);
                 return parse_quote!(mutagen::inc_dec(#lit, #n, & #cov[#flag], #mask));
             }
         }
