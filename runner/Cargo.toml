@@ -9,8 +9,8 @@ categories = ["development-tools::testing", "development-tools::cargo-plugins"]
 keywords = ["testing"]
 
 [dependencies]
-json = "0.11.12"
-failure = "0.1.1"
+json = "0.11.9"
+failure = "1.0.0"
 wait-timeout = "0.1.5"
 
 [badges]
